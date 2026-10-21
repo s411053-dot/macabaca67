@@ -487,6 +487,52 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
+    /* Wriggle & Scream Effects */
+    @keyframes wriggleAndShake {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      15% { transform: translate(-10px, 4px) rotate(-6deg); }
+      30% { transform: translate(12px, -5px) rotate(6deg); }
+      45% { transform: translate(-10px, -4px) rotate(-5deg); }
+      60% { transform: translate(8px, 5px) rotate(5deg); }
+      75% { transform: translate(-6px, -2px) rotate(-3deg); }
+      90% { transform: translate(4px, 2px) rotate(2deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+    .wriggle-mode {
+      animation: wriggleAndShake 0.6s infinite ease-in-out !important;
+      border-color: #f43f5e !important;
+      box-shadow: 0 0 35px rgba(244, 63, 94, 0.45) !important;
+    }
+    .scream-bubble {
+      position: fixed;
+      pointer-events: none;
+      font-weight: 900;
+      color: #fda4af;
+      text-shadow: 0 0 10px rgba(244, 63, 94, 0.9), 0 0 25px rgba(0, 0, 0, 0.8);
+      z-index: 99999;
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      animation: floatScream 1.4s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+      user-select: none;
+      white-space: nowrap;
+    }
+    @keyframes floatScream {
+      0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.6) rotate(-10deg);
+      }
+      20% {
+        opacity: 1;
+        transform: translateY(-25px) scale(1.25) rotate(8deg);
+      }
+      80% {
+        opacity: 0.9;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-120px) scale(1.5) rotate(-12deg);
+      }
+    }
+
     /* =========================================
        SKILL SECTION: BACKFLIP QUEST
        ========================================= */
@@ -863,7 +909,7 @@
           </div>
           <div class="spec-item">
             <span class="spec-key">核心愛好 / PASSION</span>
-            <span class="spec-val">桌球攻防、線條繪製、人際良性互虧</span>
+            <span class="spec-val">桌球攻防、在地板蠕動加尖叫、人際良性互虧</span>
           </div>
           <div class="spec-item">
             <span class="spec-key">當前修煉 / MAIN QUEST</span>
@@ -873,7 +919,7 @@
 
         <div class="spec-desc-box">
           <strong>系統註記：</strong>
-          一個充滿好奇心與生命力的現代活體人類。以幽默感化解日常沉悶，平時專注於球桌上的精準弧圈球與畫布上的自由筆觸，下課時間則致力於活絡班級氣氛（俗稱騷擾同學），深信快樂是保持人類活力運作的最高能量。
+          一個充滿好奇心與生命力的現代活體人類。以幽默感化解日常沉悶，平時專注於球桌上的精準弧圈球，精神亢奮時則熱愛在地板上忘我蠕動並伴隨高分貝尖叫以釋放靈魂能量，下課時間則致力於活絡班級氣氛（俗稱騷擾同學），深信快樂與瘋狂是保持人類活力運作的最高指標。
         </div>
       </div>
     </section>
@@ -902,18 +948,21 @@
         </div>
 
         <!-- Hobby 2 -->
-        <div class="hobby-card fade-up delay-2">
+        <div class="hobby-card fade-up delay-2" id="wormCard">
           <span class="hobby-num">02</span>
-          <div class="hobby-icon-wrap">🎨</div>
-          <h3 class="hobby-title">畫圖</h3>
+          <div class="hobby-icon-wrap" id="wormIcon">🪱</div>
+          <h3 class="hobby-title">在地板蠕動＋尖叫</h3>
           <p class="hobby-desc">
-            把腦袋中天馬行空的靈感落在紙面或數位畫布上。透過線條與色彩建構世界，享受從無到有的視覺誕生過程。
+            拋開身為脊椎動物的沉重包袱，以純粹的流體形態緊貼地表進行全方位立體蠕動，並輔以劃破長空的高分貝狂嘯（啊啊啊啊！）。這不僅是高壓日常的情緒昇華，更是當代活體人類最具靈魂張力的行為藝術。
           </p>
           <div class="hobby-tags">
-            <span class="hobby-tag">視覺創意</span>
-            <span class="hobby-tag">線條勾勒</span>
-            <span class="hobby-tag">靈感紀錄</span>
+            <span class="hobby-tag">地表平移</span>
+            <span class="hobby-tag">超音波尖叫</span>
+            <span class="hobby-tag">精神狀態優良</span>
           </div>
+          <button id="screamBtn" class="btn btn-secondary" style="margin-top: 18px; width: 100%; justify-content: center; font-size: 0.88rem; padding: 10px 14px; border-color: rgba(244, 63, 94, 0.35); color: #fda4af;">
+            📢 點擊體驗：地板蠕動＋尖叫
+          </button>
         </div>
 
         <!-- Hobby 3 -->
@@ -996,11 +1045,11 @@
           </div>
           <h3 class="exp-title">爬蟲展探索巡禮</h3>
           <p class="exp-desc">
-            親身走進冷血動物與奇異生物的奇妙世界。近距離觀察守宮、蜥蜴、蛇類等爬蟲動物的鱗片肌理、獨特色澤與沉靜生態。這趟經歷不僅拓展了生物多樣性的視野，也為日後的插畫繪圖積累了豐富的生物紋理素材。
+            親身走進冷血動物與奇異生物的奇妙世界。近距離觀察守宮、蜥蜴、蛇類等爬蟲動物的貼地運動、身體流線與沉靜生態。這趟經歷不僅拓展了生物多樣性的視野，也為日後在地板上的擬態蠕動與動作伸展積累了深厚的觀察底蘊。
           </p>
           <div class="exp-highlights">
             <span class="highlight-pill">✨ 奇異守宮與變色龍觀察</span>
-            <span class="highlight-pill">🎨 鱗片色彩與質感知覺啟發</span>
+            <span class="highlight-pill">🪱 貼地爬行與蠕動姿態啟發</span>
             <span class="highlight-pill">🌿 自然生態系認知</span>
           </div>
         </div>
@@ -1076,6 +1125,105 @@
         quickFlipBtn.addEventListener('click', () => {
           document.getElementById('skill').scrollIntoView({ behavior: 'smooth' });
           setTimeout(triggerFlip, 600);
+        });
+      }
+
+      // 3. Interactive Wriggle & Scream Feature
+      const wormCard = document.getElementById('wormCard');
+      const wormIcon = document.getElementById('wormIcon');
+      const screamBtn = document.getElementById('screamBtn');
+
+      const screamTexts = [
+        "啊啊啊啊啊啊啊啊啊啊！",
+        "AAAAAAAHHHHHHHH!!",
+        "🪱【在地板瘋狂蠕動中】🪱",
+        "📢 尖叫聲不要停！",
+        "🔊 精神狀態好到爆炸！！！",
+        "😱 救命啊地心引力好舒服！"
+      ];
+
+      // Web Audio API Synthesizer for Scream Sound Effect
+      let audioCtx = null;
+      function playScreamSound() {
+        try {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContext) return;
+          if (!audioCtx) audioCtx = new AudioContext();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+
+          osc.type = 'sawtooth';
+          // Pitch slide from 450Hz up to 1350Hz then vibrating down
+          osc.frequency.setValueAtTime(450, now);
+          osc.frequency.exponentialRampToValueAtTime(1400, now + 0.35);
+          osc.frequency.exponentialRampToValueAtTime(600, now + 0.8);
+
+          // Volume envelope
+          gain.gain.setValueAtTime(0.01, now);
+          gain.gain.linearRampToValueAtTime(0.35, now + 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.85);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start(now);
+          osc.stop(now + 0.85);
+        } catch (e) {
+          // Audio not supported or blocked
+        }
+      }
+
+      function createScreamBubble(x, y) {
+        const bubble = document.createElement('div');
+        bubble.className = 'scream-bubble';
+        const randomText = screamTexts[Math.floor(Math.random() * screamTexts.length)];
+        bubble.innerText = randomText;
+
+        // Position near click or center screen
+        const posX = x ? Math.max(20, Math.min(window.innerWidth - 300, x - 120)) : window.innerWidth / 2 - 100;
+        const posY = y ? y - 40 : window.innerHeight / 2;
+        bubble.style.left = posX + (Math.random() * 60 - 30) + 'px';
+        bubble.style.top = posY + 'px';
+
+        document.body.appendChild(bubble);
+        setTimeout(() => bubble.remove(), 1400);
+      }
+
+      function triggerWriggleAndScream(e) {
+        if (!wormCard) return;
+
+        playScreamSound();
+
+        // Add shake animation
+        wormCard.classList.add('wriggle-mode');
+        if (wormIcon) wormIcon.innerText = '😱';
+
+        // Spawn 2-3 screaming bubbles
+        const clickX = e ? e.clientX : window.innerWidth / 2;
+        const clickY = e ? e.clientY : window.innerHeight / 2;
+
+        createScreamBubble(clickX, clickY);
+        setTimeout(() => createScreamBubble(clickX + (Math.random() * 80 - 40), clickY - 30), 180);
+        setTimeout(() => createScreamBubble(clickX + (Math.random() * 80 - 40), clickY - 60), 360);
+
+        setTimeout(() => {
+          wormCard.classList.remove('wriggle-mode');
+          if (wormIcon) wormIcon.innerText = '🪱';
+        }, 1800);
+      }
+
+      if (screamBtn) {
+        screamBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          triggerWriggleAndScream(e);
+        });
+      }
+      if (wormCard) {
+        wormCard.addEventListener('click', (e) => {
+          triggerWriggleAndScream(e);
         });
       }
     });
